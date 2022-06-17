@@ -12,36 +12,36 @@ class Program
 		Program();
 		~Program();
 		void run();
+		bool close = false;
+
+	private:
 		void events();
 		void render();
 		void setup();
 		void createObjects();
 		void makeTexture();
-		bool close = false;
 
-	private:
 		unsigned int indices[6] =
 		{
 			0, 1, 3, 	// first triangle
 			1, 2, 3		// second triangle
 		};
 
-		float vertices[36] =
+		float vertices[20] =
 		{
-			// positions			// colors			// texture coords
-			0.5f, 0.5f, 0.0f, 		1.0f, 0.0f, 0.0f, 	1.0f, 1.0f,		// top right
-			0.5f, -0.5f, 0.0f, 		0.0f, 1.0f, 0.0f, 	1.0f, 0.0f,		// bottom right
-			-0.5f, -0.5f, 0.0f, 	0.0f, 0.0f, 1.0f, 	0.0f, 0.0f,		// bottom left
-			-0.5f, 0.5f, 0.0f,		1.0f, 1.0f, 0.0f,	0.0f, 1.0f,		// top left
+			// positions			// texture coord
+			0.5f, 0.5f, 0.0f,		1.0f, 1.0f,
+			0.5f, -0.5f, 0.0f,		1.0f, 0.0f,
+			-0.5f, -0.5f, 0.0f,		0.0f, 0.0f,
+			-0.5f, 0.5f, 0.0f,		0.0f, 1.0f,
 		};
 
 		unsigned int VAO, VBO, EBO;
 		unsigned int texture;
 		SDL_Event e;
 		SDL_Window* window;
+		SDL_GLContext ctx;
 		Shader shader;
-
-
 };
 
 #endif

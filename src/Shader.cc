@@ -40,7 +40,7 @@ void Shader::createShader(const char* vertexPath, const char* fragmentPath)
 
 	// compile shaders
 	const char* vShaderCode = vertexCode.c_str();
-	const char * fShaderCode = fragmentCode.c_str();
+	const char* fShaderCode = fragmentCode.c_str();
 	unsigned int vertex, fragment;
 
 	// vertex shader

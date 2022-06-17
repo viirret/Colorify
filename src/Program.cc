@@ -3,16 +3,12 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "../externals/stb_image.h"
 
-Program::Program()
+Program::Program() 
 {
 	setup();
 	shader.createShader("../shaders/vertex.vert", "../shaders/frag.frag");
 	createObjects();
 	makeTexture();
-
-	// activate shader
-	shader.use();
-	glUniform1i(glGetUniformLocation(shader.ID, "texture1"), 0);
 }
 
 Program::~Program()
@@ -32,7 +28,7 @@ void Program::setup()
 	SDL_GetCurrentDisplayMode(0, &m);
 
 	window = SDL_CreateWindow("", 0, 0, m.w / 2, m.h / 2, SDL_WINDOW_OPENGL);
-	SDL_GLContext ctx = SDL_GL_CreateContext(window);
+	ctx = SDL_GL_CreateContext(window);
 
 	// setup GLEW
 	glewInit();
@@ -57,16 +53,12 @@ void Program::createObjects()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	// position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-
-	// color attribute
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-
+	
 	// texture coord attribute
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
 }
 
 void Program::makeTexture()
@@ -115,6 +107,10 @@ void Program::render()
 	glClearColor(0.2f, 0.3f, 0.3, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	glUseProgram(shader.ID);
+	int vertexColorLocation = glGetUniformLocation(shader.ID, "color");
+	glUniform4f(vertexColorLocation, 0.0f, 1.0f, 0.0f, 1.0f);
+
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
@@ -124,3 +120,4 @@ void Program::render()
 
 	SDL_GL_SwapWindow(window);
 }
+
