@@ -1,14 +1,10 @@
 #include "Program.hh"
 
-//#define STB_IMAGE_IMPLEMENTATION
-//#include "../externals/stb_image.h"
-
 Program::Program() : cli()
 {
 	setup();
 	shader.createShader("../shaders/vertex.vert", "../shaders/frag.frag");
 	createObjects();
-	//makeTexture();
 	tex.createTexture("../pictures/example.jpg");
 }
 
@@ -62,36 +58,6 @@ void Program::createObjects()
 	glEnableVertexAttribArray(1);
 }
 
-/*
-void Program::makeTexture()
-{
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	// texture wrapping parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	// set texture filtering parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	// load texture
-	int width, height, nrChannels;
-	stbi_set_flip_vertically_on_load(true);
-	unsigned char* data = stbi_load("../pictures/example.jpg", &width, &height, &nrChannels, 0);
-	if(data)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	else
-	{
-		printf("Failed to to load texture\n");
-	}
-	stbi_image_free(data);
-}
-*/
-
 void Program::run()
 {
 	events();
@@ -107,7 +73,7 @@ void Program::events()
 
 void Program::render()
 {
-	glClearColor(0.2f, 0.3f, 0.3, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glUseProgram(shader.ID);
