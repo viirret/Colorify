@@ -1,14 +1,15 @@
 #include "Program.hh"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "../externals/stb_image.h"
+//#define STB_IMAGE_IMPLEMENTATION
+//#include "../externals/stb_image.h"
 
-Program::Program() 
+Program::Program() : cli()
 {
 	setup();
 	shader.createShader("../shaders/vertex.vert", "../shaders/frag.frag");
 	createObjects();
-	makeTexture();
+	//makeTexture();
+	tex.createTexture("../pictures/example.jpg");
 }
 
 Program::~Program()
@@ -61,6 +62,7 @@ void Program::createObjects()
 	glEnableVertexAttribArray(1);
 }
 
+/*
 void Program::makeTexture()
 {
 	glGenTextures(1, &texture);
@@ -88,6 +90,7 @@ void Program::makeTexture()
 	}
 	stbi_image_free(data);
 }
+*/
 
 void Program::run()
 {
@@ -109,10 +112,10 @@ void Program::render()
 
 	glUseProgram(shader.ID);
 	int vertexColorLocation = glGetUniformLocation(shader.ID, "color");
-	glUniform4f(vertexColorLocation, 0.0f, 1.0f, 0.0f, 1.0f);
+	glUniform4f(vertexColorLocation, cli.color.r, cli.color.g, cli.color.b, 1.0f);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glBindTexture(GL_TEXTURE_2D, tex.texture);
 
 	shader.use();
 	glBindVertexArray(VAO);

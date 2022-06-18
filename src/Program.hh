@@ -5,6 +5,8 @@
 #include <SDL2/SDL.h>
 #include <cstdio>
 #include "Shader.hh"
+#include "Cli.hh"
+#include "Texture.hh"
 
 class Program
 {
@@ -37,11 +39,13 @@ class Program
 		};
 
 		unsigned int VAO, VBO, EBO;
-		unsigned int texture;
+		//unsigned int texture;
 		SDL_Event e;
 		SDL_Window* window;
 		SDL_GLContext ctx;
 		Shader shader;
+		Cli cli;
+		Texture tex;
 };
 
 #endif

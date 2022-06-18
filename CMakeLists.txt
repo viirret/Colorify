@@ -12,7 +12,7 @@ include_directories(${SDL2_INCLUDE_DIRS})
 find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
 
-add_executable(${PROJECT_NAME} src/Program.cc src/Shader.cc src/main.cc)
+add_executable(${PROJECT_NAME} src/Program.cc src/Shader.cc src/Cli.cc src/Texture.cc src/main.cc)
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES})
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")

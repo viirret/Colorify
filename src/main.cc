@@ -1,6 +1,6 @@
 #include "Program.hh"
 
-int main()
+int main(int argc, char** argv)
 {
 	Program p;
 
