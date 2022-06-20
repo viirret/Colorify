@@ -6,6 +6,8 @@ class Color
 	public:
 		float r, g, b;
 		void green();
+		void red();
+		void blue();
 };
 
 #endif

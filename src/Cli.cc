@@ -3,16 +3,18 @@
 Cli::Cli()
 {
 	printf("Press \"l\" to show all premade colors\n");
-	printf("Give premade color or RGB colors for example \"000 255 000\"\n");
+	printf("Give premade color or RGB color for example \"000 255 000\"\n");
+
 	parse();
 }
 
 void Cli::parse()
 {
 	std::string input;
-	for(;;)
+	while(std::getline(std::cin, input))
 	{
-		std::getline(std::cin, input);
+		bool flag = true;
+
 		if(input == "l")
 			list();
 
@@ -21,26 +23,45 @@ void Cli::parse()
 			color.green();
 			break;
 		}
+		else if(input == "red" || input == "Red")
+		{
+			color.red();
+			break;
+		}
+		else if(input == "blue" || input == "Blue")
+		{
+			color.blue();
+			break;
+		}
 		else
 		{
-			std::stringstream stream(input);
-			for(int i = 0; i < 3; i++)
+			std::stringstream ss(input);
+			for(size_t i = 0; i < 3; i++)
 			{
 				int n;
-				stream >> n;
+				ss >> n;
 
-				if(i == 0)
-					r = n;
-
-				else if(i == 1)
-					g = n;
-
-				else if(i == 2)
+				if(ss.fail())
 				{
-					b = n;
-					convert();
+					printf("RGB value needs three arguments\n");
+					flag = false;
 					break;
 				}
+
+				else
+				{
+					switch(i)
+					{
+						case 0: r = n; break;
+						case 1: g = n; break;
+						case 2: b = n; convert(); break;
+					}
+				}
+			}
+			if(!flag)
+			{
+				printf("Wrong input!\n");
+				continue;
 			}
 			break;
 		}

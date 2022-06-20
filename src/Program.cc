@@ -5,7 +5,11 @@ Program::Program() : cli()
 	setup();
 	shader.createShader("../shaders/vertex.vert", "../shaders/frag.frag");
 	createObjects();
-	tex.createTexture("../pictures/example.jpg");
+
+	for(const auto& entry : std::filesystem::directory_iterator(path))
+		filePath = entry.path();
+
+	tex.createTexture(filePath);
 }
 
 Program::~Program()

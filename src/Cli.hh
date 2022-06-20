@@ -2,10 +2,10 @@
 #define CLI_HH
 
 #include <cstdio>
-#include <cstring>
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <climits>
 #include "Color.hh"
 
 class Cli
@@ -16,6 +16,7 @@ class Cli
 		void convert();
 		void list();
 		void parse();
+
 	private:
 		int r, g, b;
 };

@@ -3,7 +3,7 @@
 
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
-#include <cstdio>
+#include <filesystem>
 #include "Shader.hh"
 #include "Cli.hh"
 #include "Texture.hh"
@@ -39,13 +39,15 @@ class Program
 		};
 
 		unsigned int VAO, VBO, EBO;
-		//unsigned int texture;
 		SDL_Event e;
 		SDL_Window* window;
 		SDL_GLContext ctx;
 		Shader shader;
 		Cli cli;
 		Texture tex;
+		const std::string path = "../pictures";
+		std::string filePath;
+	
 };
 
 #endif
