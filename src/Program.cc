@@ -77,20 +77,23 @@ void Program::events()
 
 void Program::render()
 {
+	// black background
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
-
+	
+	// cli color to vertex uniform
 	glUseProgram(shader.ID);
 	int vertexColorLocation = glGetUniformLocation(shader.ID, "color");
 	glUniform4f(vertexColorLocation, cli.color.r, cli.color.g, cli.color.b, 1.0f);
-
+	
+	// set texture
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, tex.texture);
 
+	// main rendering
 	shader.use();
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
 	SDL_GL_SwapWindow(window);
 }
 
