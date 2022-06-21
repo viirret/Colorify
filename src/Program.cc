@@ -6,6 +6,9 @@ Program::Program() : cli()
 	shader.createShader("../shaders/vertex.vert", "../shaders/frag.frag");
 	createObjects();
 
+	if(std::filesystem::exists("../pictures/x.txt"))
+		std::filesystem::remove("../pictures/x.txt");
+
 	for(const auto& entry : std::filesystem::directory_iterator(path))
 		filePath = entry.path();
 
