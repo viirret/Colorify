@@ -25,7 +25,9 @@ sudo pacman -S glew
 ```
 git clone https://github.com/valtteriviirret/Colorify.git
 ```
-3. Go to programs directory and add commands
+3. Add your image to **pictures** directory
+
+4. Go to programs directory and add commands
 ```
 mkdir build && cd build
 ```
